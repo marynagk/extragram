@@ -1,9 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+<div class='post'>
+  <div class='header'>
+    <span>
+      Avatar
+    </span>
+    <span class='username'>
+      <%= @user.username %>
+    </span>
+    <span>
+      <%= form_for Following.new(user_id: @post.user_id) do |f| %>
+        <%= f.hidden_field :user_id %>
+        <%= hidden_field_tag "following[post_id]", @post.id %>
+        <%= f.submit 'Follow' %>
+      <% end %>
+    </span>
+  </div>
+  <div class='body'>
+    <%= image_path 'world_of_engineering.jpg' %>
+    <%= image_tag 'world_of_engineering.jpg' %>
+    Image
+  </div>
+  <div>
+    <span><%= @post.likes.size %> likes</span>
+    <span><%= @post.likers.to_a.uniq  %> likers</span>
+    <span>Comment</span>
+    <span>Bookmark</span>
+  </div>
+  <div class='description'>
+    <%= @post.description %>
+  </div>
+  <div class='comments'>
+    Comments
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
