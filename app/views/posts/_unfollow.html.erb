@@ -1,0 +1,7 @@
+
+
+ <% user_id = Post.find(params[:id]).user.id %>
+ <% cur_user_id = @cur_user %>
+ <% @following = Following.find_by user_id: user_id, follower_id: cur_user_id %>
+
+        <td><%= link_to 'Unfollow', following_path(@following), method: :delete, data: { confirm: 'Are you sure?' } %></td>

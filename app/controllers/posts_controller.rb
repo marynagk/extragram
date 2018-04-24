@@ -12,6 +12,8 @@ class PostsController < ApplicationController
   def show
       @post = Post.find(params[:id])
       @user = @post.user
+      @cur_user = current_user
+    # @following = Following.find_by user_id: @user.id, follower_id: current_user.id
   end
 
   # GET /posts/new
@@ -73,4 +75,5 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:description)
     end
+
 end
